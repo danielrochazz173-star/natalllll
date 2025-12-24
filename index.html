@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Feliz Natal! 🎄</title>
+    <link rel="icon" type="image/png" href="logo-dicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: #fff;
+        }
+
+        /* Neve caindo */
+        .snow {
+            position: fixed;
+            top: -10px;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flake {
+            position: absolute;
+            color: #fff;
+            font-size: 1.5em;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        .face-falling {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            animation: fallFace linear infinite;
+            opacity: 0.85;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 25px rgba(255, 215, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes fallFace {
+            from {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            to {
+                transform: translateY(calc(100vh + 100px)) rotate(720deg);
+            }
+        }
+
+        /* Estrelas no céu */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Container principal */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Título */
+        .title {
+            text-align: center;
+            margin: 30px 0;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .title h1 {
+            font-size: 3.5em;
+            text-shadow: 0 0 20px #ff6b6b, 0 0 30px #ff6b6b, 0 0 40px #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.3); }
+        }
+
+        /* Árvore de Natal */
+        .tree-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .tree {
+            position: relative;
+            text-align: center;
+        }
+
+        .star-top {
+            font-size: 4em;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700;
+            animation: rotate 3s linear infinite;
+            display: block;
+            margin-bottom: 10px;
+            z-index: 10;
+            position: relative;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .tree-section {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .tree-layer {
+            width: 0;
+            height: 0;
+            border-left: 80px solid transparent;
+            border-right: 80px solid transparent;
+            border-bottom: 100px solid #0d5d1f;
+            margin: 0 auto 5px;
+            position: relative;
+            filter: drop-shadow(0 0 10px rgba(13, 93, 31, 0.8));
+        }
+
+        .tree-layer:nth-child(2) {
+            border-left-width: 100px;
+            border-right-width: 100px;
+            border-bottom-width: 120px;
+            border-bottom-color: #0f6b24;
+        }
+
+        .tree-layer:nth-child(3) {
+            border-left-width: 120px;
+            border-right-width: 120px;
+            border-bottom-width: 140px;
+            border-bottom-color: #117a29;
+        }
+
+        .tree-layer:nth-child(4) {
+            border-left-width: 140px;
+            border-right-width: 140px;
+            border-bottom-width: 160px;
+            border-bottom-color: #13892e;
+        }
+
+        .ornament {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px currentColor, inset 0 0 5px rgba(255, 255, 255, 0.5);
+            z-index: 5;
+        }
+
+        .ornament.red { 
+            background: radial-gradient(circle, #ff6666, #cc0000);
+            color: #ff4444;
+        }
+        .ornament.blue { 
+            background: radial-gradient(circle, #6666ff, #0000cc);
+            color: #4444ff;
+        }
+        .ornament.gold { 
+            background: radial-gradient(circle, #ffeb3b, #ffa000);
+            color: #ffd700;
+        }
+        .ornament.purple { 
+            background: radial-gradient(circle, #bb66ff, #6600cc);
+            color: #aa44ff;
+        }
+
+        /* Posicionamento dos ornamentos na primeira camada */
+        .tree-layer:nth-child(1) .ornament:nth-child(1) { top: 30px; left: -25px; }
+        .tree-layer:nth-child(1) .ornament:nth-child(2) { top: 30px; right: -25px; }
+        .tree-layer:nth-child(1) .ornament:nth-child(3) { top: 60px; left: 50%; transform: translateX(-50%); }
+
+        /* Posicionamento dos ornamentos na segunda camada */
+        .tree-layer:nth-child(2) .ornament:nth-child(1) { top: 20px; left: -40px; }
+        .tree-layer:nth-child(2) .ornament:nth-child(2) { top: 20px; right: -40px; }
+        .tree-layer:nth-child(2) .ornament:nth-child(3) { top: 50px; left: 50%; transform: translateX(-50%); }
+        .tree-layer:nth-child(2) .ornament:nth-child(4) { top: 80px; left: -20px; }
+
+        /* Posicionamento dos ornamentos na terceira camada */
+        .tree-layer:nth-child(3) .ornament:nth-child(1) { top: 20px; left: -50px; }
+        .tree-layer:nth-child(3) .ornament:nth-child(2) { top: 20px; right: -50px; }
+        .tree-layer:nth-child(3) .ornament:nth-child(3) { top: 50px; left: 50%; transform: translateX(-50%); }
+        .tree-layer:nth-child(3) .ornament:nth-child(4) { top: 80px; left: -30px; }
+        .tree-layer:nth-child(3) .ornament:nth-child(5) { top: 80px; right: -30px; }
+
+        /* Posicionamento dos ornamentos na quarta camada */
+        .tree-layer:nth-child(4) .ornament:nth-child(1) { top: 20px; left: -60px; }
+        .tree-layer:nth-child(4) .ornament:nth-child(2) { top: 20px; right: -60px; }
+        .tree-layer:nth-child(4) .ornament:nth-child(3) { top: 50px; left: 50%; transform: translateX(-50%); }
+        .tree-layer:nth-child(4) .ornament:nth-child(4) { top: 80px; left: -40px; }
+        .tree-layer:nth-child(4) .ornament:nth-child(5) { top: 80px; right: -40px; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.1); }
+        }
+
+        @keyframes twinkle-ornament {
+            0%, 100% { 
+                opacity: 1;
+                box-shadow: 0 0 15px currentColor, 0 0 25px currentColor, inset 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+            50% { 
+                opacity: 0.6;
+                box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, inset 0 0 2px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .ornament {
+            animation: bounce 2s ease-in-out infinite, twinkle-ornament 1.5s ease-in-out infinite;
+        }
+
+        .ornament:nth-child(odd) {
+            animation-delay: 0s, 0s;
+        }
+
+        .ornament:nth-child(even) {
+            animation-delay: 0s, 0.75s;
+        }
+
+        .trunk {
+            background: linear-gradient(180deg, #8b4513 0%, #654321 100%);
+            width: 60px;
+            height: 100px;
+            margin: 10px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(139, 69, 19, 0.8), inset 0 0 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .tree-base {
+            background: linear-gradient(180deg, #654321 0%, #8b4513 100%);
+            width: 140px;
+            height: 25px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(139, 69, 19, 0.6);
+        }
+
+        /* Papai Noel */
+        .santa-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+        }
+
+        .santa {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .santa h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .santa-emoji {
+            font-size: 5em;
+            animation: wave 2s ease-in-out infinite;
+            display: block;
+            margin: 20px 0;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .santa-message {
+            font-size: 1.3em;
+            margin-top: 15px;
+            color: #ffd700;
+        }
+
+        /* Presentes */
+        .presents-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .present {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .present:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .present:nth-child(2) { animation-delay: 0.5s; }
+        .present:nth-child(3) { animation-delay: 1s; }
+        .present:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .present-box {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .present-box:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .present-1 { background: linear-gradient(135deg, #ff6b6b, #ee5a6f); }
+        .present-2 { background: linear-gradient(135deg, #4ecdc4, #44a08d); }
+        .present-3 { background: linear-gradient(135deg, #ffe66d, #ffd93d); }
+        .present-4 { background: linear-gradient(135deg, #a8e6cf, #88d8a3); }
+
+        .ribbon {
+            position: absolute;
+            background: #ffd700;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        .ribbon-h {
+            width: 100%;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .ribbon-v {
+            width: 20px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Mensagem e Versículo */
+        .message-container {
+            text-align: center;
+            margin: 50px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+        }
+
+        .message-container h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700;
+        }
+
+        .verse {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin: 20px 0;
+            font-style: italic;
+            color: #e0e0e0;
+        }
+
+        .verse-reference {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #ffd700;
+        }
+
+        .blessing {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #ff6b6b;
+        }
+
+        .emojis {
+            font-size: 2em;
+            margin-top: 20px;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Modal de Presente */
+        .present-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .present-modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px) scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+            animation: slideUp 0.5s ease-out;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-present-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .modal-title {
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #ffd700;
+        }
+
+        .modal-verse {
+            font-size: 1.4em;
+            line-height: 2;
+            color: #fff;
+            margin: 30px 0;
+            font-style: italic;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-reference {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .present-box {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .present-box:active {
+            transform: scale(0.95);
+        }
+
+        .present-box.opened {
+            animation: openPresent 0.6s ease-out;
+        }
+
+        @keyframes openPresent {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .title h1 { font-size: 2em; }
+            .tree-layer { font-size: 0.9em; }
+            .presents-container { gap: 15px; }
+            .present { width: 120px; height: 120px; }
+            .message-container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Estrelas no céu -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Neve -->
+    <div class="snow" id="snow"></div>
+
+    <!-- Container principal -->
+    <div class="container">
+        <!-- Título -->
+        <div class="title">
+            <h1>🎄 FELIZ NATAL! 🎄</h1>
+        </div>
+
+        <!-- Árvore de Natal -->
+        <div class="tree-container">
+            <div class="tree">
+                <span class="star-top">⭐</span>
+                <div class="tree-section">
+                    <div class="tree-layer">
+                        <div class="ornament red"></div>
+                        <div class="ornament blue"></div>
+                        <div class="ornament gold"></div>
+                    </div>
+                    <div class="tree-layer">
+                        <div class="ornament purple"></div>
+                        <div class="ornament red"></div>
+                        <div class="ornament blue"></div>
+                        <div class="ornament gold"></div>
+                    </div>
+                    <div class="tree-layer">
+                        <div class="ornament purple"></div>
+                        <div class="ornament red"></div>
+                        <div class="ornament blue"></div>
+                        <div class="ornament gold"></div>
+                        <div class="ornament purple"></div>
+                    </div>
+                    <div class="tree-layer">
+                        <div class="ornament red"></div>
+                        <div class="ornament blue"></div>
+                        <div class="ornament gold"></div>
+                        <div class="ornament purple"></div>
+                        <div class="ornament red"></div>
+                    </div>
+                </div>
+                <div class="trunk"></div>
+                <div class="tree-base"></div>
+            </div>
+        </div>
+
+        <!-- Papai Noel -->
+        <div class="santa-container">
+            <div class="santa">
+                <h2>🎅 PAPAI NOEL 🎅</h2>
+                <span class="santa-emoji">🎅</span>
+                <div class="santa-message">
+                    Ho Ho Ho! Feliz Natal! 🎄
+                </div>
+                <div style="margin-top: 15px; font-size: 1.1em;">
+                    🎁 Presentes para todas as crianças! 🎁
+                </div>
+            </div>
+        </div>
+
+        <!-- Presentes -->
+        <div style="text-align: center; margin: 20px 0; font-size: 1.2em; color: #ffd700; text-shadow: 0 0 10px #ffd700;">
+            💝 Clique nos presentes para receber uma bênção! 💝
+        </div>
+        <div class="presents-container">
+            <div class="present" data-present="1">
+                <div class="present-box present-1">
+                    <span>🎁</span>
+                    <div class="ribbon ribbon-h"></div>
+                    <div class="ribbon ribbon-v"></div>
+                </div>
+            </div>
+            <div class="present" data-present="2">
+                <div class="present-box present-2">
+                    <span>🎁</span>
+                    <div class="ribbon ribbon-h"></div>
+                    <div class="ribbon ribbon-v"></div>
+                </div>
+            </div>
+            <div class="present" data-present="3">
+                <div class="present-box present-3">
+                    <span>🎁</span>
+                    <div class="ribbon ribbon-h"></div>
+                    <div class="ribbon ribbon-v"></div>
+                </div>
+            </div>
+            <div class="present" data-present="4">
+                <div class="present-box present-4">
+                    <span>🎁</span>
+                    <div class="ribbon ribbon-h"></div>
+                    <div class="ribbon ribbon-v"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensagem e Versículo -->
+        <div class="message-container">
+            <h2>✨ Mensagem de Natal ✨</h2>
+            <div class="verse">
+                "Porque um menino nos nasceu, um filho nos foi dado,<br>
+                e o governo está sobre os seus ombros.<br>
+                E ele será chamado Maravilhoso Conselheiro, Deus Poderoso,<br>
+                Pai Eterno, Príncipe da Paz."
+            </div>
+            <div class="verse-reference">
+                — Isaías 9:6
+            </div>
+            <div class="blessing">
+                Que Deus abençoe você e sua família!
+            </div>
+            <div class="emojis">
+                🎄🎅🎁✨🎄🎅🎁✨🎄
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Presente -->
+    <div class="present-modal" id="presentModal">
+        <div class="modal-content">
+            <div class="modal-close" onclick="closePresent()">×</div>
+            <div class="modal-present-icon">🎁</div>
+            <div class="modal-title">✨ Bênção de Natal ✨</div>
+            <div class="modal-verse" id="modalVerse"></div>
+            <div class="modal-reference" id="modalReference"></div>
+        </div>
+    </div>
+
+    <script>
+        // Criar estrelas no céu
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Criar neve
+        function createSnow() {
+            const snowContainer = document.getElementById('snow');
+            const flakes = ['❄', '❅', '❆'];
+            const numFlakes = 50;
+            
+            for (let i = 0; i < numFlakes; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'flake';
+                flake.textContent = flakes[Math.floor(Math.random() * flakes.length)];
+                flake.style.left = Math.random() * 100 + '%';
+                flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                flake.style.animationDelay = Math.random() * 2 + 's';
+                flake.style.opacity = Math.random() * 0.5 + 0.5;
+                snowContainer.appendChild(flake);
+            }
+        }
+
+        // Criar rostos caindo
+        function createFallingFaces() {
+            const snowContainer = document.getElementById('snow');
+            const faceImages = [
+                'rosto_1.png',
+                'rosto_2.png',
+                'rosto_3.png',
+                'rosto_5.png',
+                'rosto_7.png',
+                'rosto_8.png',
+                'rosto_9.png',
+                'rosto_10.png',
+                'rosto_14.jpeg',
+                'rosto_15.jpeg',
+                'rosto_16.jpeg',
+                'rosto_17.jpeg',
+                'rosto_18.png',
+                'rosto_19.jpeg',
+                'rosto_20.png',
+                'rosto_21.png',
+                'rosto_22.png'
+            ];
+            const numFaces = 34; // Múltiplo do número de imagens (17 x 2) para distribuição uniforme
+            
+            // Criar array com distribuição uniforme - cada rosto aparece o mesmo número de vezes
+            const distributedFaces = [];
+            const repetitions = Math.floor(numFaces / faceImages.length);
+            const remainder = numFaces % faceImages.length;
+            
+            // Adicionar cada imagem o número base de vezes
+            for (let i = 0; i < repetitions; i++) {
+                distributedFaces.push(...faceImages);
+            }
+            
+            // Adicionar imagens aleatórias para completar o resto (se houver)
+            for (let i = 0; i < remainder; i++) {
+                distributedFaces.push(faceImages[Math.floor(Math.random() * faceImages.length)]);
+            }
+            
+            // Embaralhar o array para distribuição aleatória mas uniforme
+            for (let i = distributedFaces.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [distributedFaces[i], distributedFaces[j]] = [distributedFaces[j], distributedFaces[i]];
+            }
+            
+            // Criar os elementos de rosto
+            for (let i = 0; i < distributedFaces.length; i++) {
+                const face = document.createElement('img');
+                face.className = 'face-falling';
+                face.src = distributedFaces[i];
+                face.alt = 'Rosto';
+                face.style.left = Math.random() * 100 + '%';
+                face.style.animationDuration = (Math.random() * 5 + 4) + 's'; // Mais lento que a neve
+                face.style.animationDelay = Math.random() * 3 + 's';
+                face.style.opacity = Math.random() * 0.3 + 0.7;
+                // Tamanho variado
+                const size = Math.random() * 20 + 30; // Entre 30px e 50px
+                face.style.width = size + 'px';
+                face.style.height = size + 'px';
+                snowContainer.appendChild(face);
+            }
+        }
+
+        // Versículos de bênção para cada presente (múltiplos versículos por presente)
+        const blessings = {
+            1: [
+                {
+                    verse: "\"O Senhor te abençoe e te guarde;<br>o Senhor faça resplandecer o seu rosto sobre ti<br>e tenha misericórdia de ti;<br>o Senhor sobre ti levante o seu rosto<br>e te dê a paz.\"",
+                    reference: "— Números 6:24-26"
+                },
+                {
+                    verse: "\"O Senhor te abençoará e te guardará;<br>o Senhor fará resplandecer o seu rosto sobre ti<br>e terá misericórdia de ti;<br>o Senhor sobre ti levante o seu rosto<br>e te ponha em paz.\"",
+                    reference: "— Números 6:24-26"
+                },
+                {
+                    verse: "\"Que o Senhor te abençoe ricamente<br>e te guarde de todo mal;<br>que Ele te dê saúde, paz e prosperidade<br>em todos os dias da tua vida.\"",
+                    reference: "— Bênção Especial"
+                },
+                {
+                    verse: "\"O Senhor te abençoe com toda sorte de bênçãos<br>e te guarde em todos os teus caminhos;<br>que a graça e a misericórdia<br>sejam contigo sempre.\"",
+                    reference: "— Bênção de Natal"
+                },
+                {
+                    verse: "\"Que o Senhor te conceda<br>tudo que o teu coração deseja;<br>que Ele te guarde e te proteja<br>em todos os momentos da tua vida.\"",
+                    reference: "— Bênção Especial"
+                }
+            ],
+            2: [
+                {
+                    verse: "\"Porque eu bem sei os pensamentos que tenho a teu respeito, diz o Senhor;<br>pensamentos de paz, e não de mal,<br>para te dar o fim que esperas.\"",
+                    reference: "— Jeremias 29:11"
+                },
+                {
+                    verse: "\"Não temas, porque eu sou contigo;<br>não te assombres, porque eu sou teu Deus;<br>eu te fortaleço, e te ajudo,<br>e te sustento com a destra da minha justiça.\"",
+                    reference: "— Isaías 41:10"
+                },
+                {
+                    verse: "\"O Senhor te abençoe com planos de paz e prosperidade;<br>que Ele te guie em todos os teus caminhos<br>e te dê um futuro cheio de esperança.\"",
+                    reference: "— Bênção Especial"
+                },
+                {
+                    verse: "\"Que o Senhor te fortaleça em todos os momentos;<br>que Ele te dê coragem e sabedoria<br>para enfrentar todos os desafios da vida.\"",
+                    reference: "— Bênção de Natal"
+                },
+                {
+                    verse: "\"Lança sobre o Senhor o teu cuidado,<br>e Ele te susterá;<br>nunca permitirá que sejas abalado.\"",
+                    reference: "— Salmos 55:22"
+                },
+                {
+                    verse: "\"Que o Senhor te guarde de todo mal<br>e te abençoe com Sua proteção divina;<br>que a paz e a alegria<br>sejam constantes na tua vida.\"",
+                    reference: "— Bênção Especial"
+                }
+            ],
+            3: [
+                {
+                    verse: "\"Confia no Senhor de todo o teu coração<br>e não te estribes no teu próprio entendimento.<br>Reconhece-o em todos os teus caminhos,<br>e Ele endireitará as tuas veredas.\"",
+                    reference: "— Provérbios 3:5-6"
+                },
+                {
+                    verse: "\"Porque eu sou o Senhor teu Deus,<br>que te seguro pela tua mão direita,<br>e te digo: Não temas, eu te ajudo.\"",
+                    reference: "— Isaías 41:13"
+                },
+                {
+                    verse: "\"Que o Senhor te dê sabedoria e discernimento<br>em todas as tuas decisões;<br>que Ele te guie pelos caminhos certos<br>e te abençoe com Sua direção.\"",
+                    reference: "— Bênção Especial"
+                },
+                {
+                    verse: "\"Mas os que esperam no Senhor renovarão as suas forças;<br>subirão com asas como águias;<br>correrão e não se cansarão;<br>andarão e não se fatigarão.\"",
+                    reference: "— Isaías 40:31"
+                },
+                {
+                    verse: "\"Que o Senhor te fortaleça cada dia mais;<br>que Ele te dê forças para superar<br>todos os obstáculos e alcançar<br>os teus sonhos e objetivos.\"",
+                    reference: "— Bênção de Natal"
+                },
+                {
+                    verse: "\"O Senhor é a tua luz e a tua salvação;<br>a quem temerás?<br>O Senhor é a força da tua vida;<br>de quem te recearás?\"",
+                    reference: "— Salmos 27:1"
+                }
+            ],
+            4: [
+                {
+                    verse: "\"E a paz de Deus, que excede todo o entendimento,<br>guardará o teu coração e os teus pensamentos<br>em Cristo Jesus.\"",
+                    reference: "— Filipenses 4:7"
+                },
+                {
+                    verse: "\"Que a paz de Deus esteja contigo sempre;<br>que o teu coração seja guardado<br>e que a alegria do Senhor<br>seja a tua força.\"",
+                    reference: "— Bênção Especial"
+                },
+                {
+                    verse: "\"Alegra-te sempre no Senhor;<br>outra vez digo, alegra-te.<br>Que a alegria e a paz<br>sejam constantes na tua vida.\"",
+                    reference: "— Filipenses 4:4"
+                },
+                {
+                    verse: "\"Que o Senhor te abençoe com paz e tranquilidade;<br>que Ele guarde o teu coração<br>e te dê alegria em todos os momentos.\"",
+                    reference: "— Bênção de Natal"
+                },
+                {
+                    verse: "\"O Senhor te abençoará e te guardará;<br>o Senhor fará resplandecer o seu rosto sobre ti<br>e terá misericórdia de ti;<br>o Senhor sobre ti levante o seu rosto<br>e te ponha em paz.\"",
+                    reference: "— Números 6:24-26"
+                },
+                {
+                    verse: "\"Que o Senhor te encha de alegria e paz;<br>que a Sua presença seja constante na tua vida<br>e que tu experimentes<br>todas as bênçãos que Ele tem para ti.\"",
+                    reference: "— Bênção Especial"
+                },
+                {
+                    verse: "\"Deixo-te a paz, a minha paz te dou;<br>não te dou como o mundo a dá.<br>Não se turbe o teu coração, nem se atemorize.\"",
+                    reference: "— João 14:27"
+                }
+            ]
+        };
+
+        // Função para abrir presente
+        function openPresent(presentNumber) {
+            const modal = document.getElementById('presentModal');
+            const modalVerse = document.getElementById('modalVerse');
+            const modalReference = document.getElementById('modalReference');
+            const presentBox = document.querySelector(`[data-present="${presentNumber}"] .present-box`);
+            
+            // Adicionar animação de abertura
+            presentBox.classList.add('opened');
+            
+            // Mostrar versículo aleatório correspondente
+            const blessingArray = blessings[presentNumber];
+            const randomIndex = Math.floor(Math.random() * blessingArray.length);
+            const blessing = blessingArray[randomIndex];
+            modalVerse.innerHTML = blessing.verse;
+            modalReference.textContent = blessing.reference;
+            
+            // Mostrar modal
+            modal.classList.add('active');
+            
+            // Remover animação após um tempo
+            setTimeout(() => {
+                presentBox.classList.remove('opened');
+            }, 600);
+        }
+
+        // Função para fechar modal
+        function closePresent() {
+            const modal = document.getElementById('presentModal');
+            modal.classList.remove('active');
+        }
+
+        // Adicionar eventos de clique nos presentes
+        document.addEventListener('DOMContentLoaded', function() {
+            const presents = document.querySelectorAll('.present');
+            
+            presents.forEach(present => {
+                present.addEventListener('click', function() {
+                    const presentNumber = this.getAttribute('data-present');
+                    openPresent(presentNumber);
+                });
+            });
+
+            // Fechar modal ao clicar fora
+            const modal = document.getElementById('presentModal');
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closePresent();
+                }
+            });
+
+            // Fechar modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closePresent();
+                }
+            });
+        });
+
+        // Inicializar
+        createStars();
+        createSnow();
+        createFallingFaces();
+    </script>
+</body>
+</html>
+
