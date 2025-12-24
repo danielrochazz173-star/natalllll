@@ -517,11 +517,23 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s;
+            z-index: 1001;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .modal-close:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: rotate(90deg);
+        }
+
+        .modal-close:active {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0.9);
+        }
+
+        .modal-close-bottom {
+            display: none;
         }
 
         .modal-present-icon {
@@ -573,11 +585,209 @@
 
         /* Responsivo */
         @media (max-width: 768px) {
-            .title h1 { font-size: 2em; }
-            .tree-layer { font-size: 0.9em; }
-            .presents-container { gap: 15px; }
-            .present { width: 120px; height: 120px; }
-            .message-container { padding: 20px; }
+            .title h1 { 
+                font-size: 2em; 
+                padding: 0 10px;
+            }
+            
+            .tree-container {
+                margin: 20px 0;
+            }
+            
+            .tree-layer {
+                border-left-width: 60px !important;
+                border-right-width: 60px !important;
+                border-bottom-width: 80px !important;
+            }
+            
+            .tree-layer:nth-child(2) {
+                border-left-width: 70px !important;
+                border-right-width: 70px !important;
+                border-bottom-width: 90px !important;
+            }
+            
+            .tree-layer:nth-child(3) {
+                border-left-width: 80px !important;
+                border-right-width: 80px !important;
+                border-bottom-width: 100px !important;
+            }
+            
+            .tree-layer:nth-child(4) {
+                border-left-width: 90px !important;
+                border-right-width: 90px !important;
+                border-bottom-width: 110px !important;
+            }
+            
+            .ornament {
+                width: 12px;
+                height: 12px;
+            }
+            
+            .trunk {
+                width: 40px;
+                height: 70px;
+            }
+            
+            .tree-base {
+                width: 100px;
+                height: 18px;
+            }
+            
+            .santa {
+                padding: 20px;
+                margin: 0 10px;
+            }
+            
+            .santa h2 {
+                font-size: 1.5em;
+            }
+            
+            .santa-emoji {
+                font-size: 3em;
+            }
+            
+            .santa-message {
+                font-size: 1.1em;
+            }
+            
+            .presents-container { 
+                gap: 15px; 
+                margin: 20px 0;
+            }
+            
+            .present { 
+                width: 120px; 
+                height: 120px; 
+            }
+            
+            .present-box {
+                font-size: 2.5em;
+            }
+            
+            .message-container { 
+                padding: 20px;
+                margin: 30px 10px;
+            }
+            
+            .message-container h2 {
+                font-size: 1.8em;
+            }
+            
+            .verse {
+                font-size: 1.1em;
+                line-height: 1.6;
+            }
+            
+            .blessing {
+                font-size: 1.2em;
+            }
+            
+            /* Modal otimizado para mobile */
+            .modal-content {
+                padding: 30px 20px;
+                width: 95%;
+                max-width: none;
+                border-radius: 20px;
+                max-height: 90vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .modal-close {
+                width: 50px;
+                height: 50px;
+                top: 10px;
+                right: 10px;
+                font-size: 2em;
+                background: rgba(255, 255, 255, 0.3);
+                border: 3px solid rgba(255, 255, 255, 0.6);
+            }
+            
+            .modal-close-bottom {
+                display: block;
+                margin-top: 25px;
+                padding: 15px 30px;
+                background: rgba(255, 215, 0, 0.3);
+                border: 2px solid rgba(255, 215, 0, 0.6);
+                border-radius: 25px;
+                color: #ffd700;
+                font-size: 1.2em;
+                font-weight: bold;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+                transition: all 0.3s;
+            }
+            
+            .modal-close-bottom:active {
+                background: rgba(255, 215, 0, 0.5);
+                transform: scale(0.95);
+            }
+            
+            .modal-present-icon {
+                font-size: 3.5em;
+                margin-bottom: 15px;
+            }
+            
+            .modal-title {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            
+            .modal-verse {
+                font-size: 1.1em;
+                line-height: 1.6;
+                margin: 20px 0;
+            }
+            
+            .modal-reference {
+                font-size: 1em;
+                margin-top: 15px;
+            }
+            
+            /* Melhorar área de toque */
+            .present {
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+            
+            /* Ajustar neve e rostos para mobile */
+            .flake {
+                font-size: 1.2em;
+            }
+            
+            .face-falling {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        
+        /* Ajustes para telas muito pequenas */
+        @media (max-width: 480px) {
+            .title h1 {
+                font-size: 1.5em;
+            }
+            
+            .present {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .present-box {
+                font-size: 2em;
+            }
+            
+            .modal-content {
+                padding: 25px 15px;
+            }
+            
+            .modal-title {
+                font-size: 1.5em;
+            }
+            
+            .modal-verse {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -709,6 +919,7 @@
             <div class="modal-title">✨ Bênção de Natal ✨</div>
             <div class="modal-verse" id="modalVerse"></div>
             <div class="modal-reference" id="modalReference"></div>
+            <div class="modal-close-bottom" onclick="closePresent()">Fechar</div>
         </div>
     </div>
 
@@ -766,9 +977,10 @@
                 'rosto_19.jpeg',
                 'rosto_20.png',
                 'rosto_21.png',
-                'rosto_22.png'
+                'rosto_22.png',
+                'rosto_23.jpeg'
             ];
-            const numFaces = 34; // Múltiplo do número de imagens (17 x 2) para distribuição uniforme
+            const numFaces = 36; // Múltiplo do número de imagens (18 x 2) para distribuição uniforme
             
             // Criar array com distribuição uniforme - cada rosto aparece o mesmo número de vezes
             const distributedFaces = [];
@@ -936,6 +1148,8 @@
             
             // Mostrar modal
             modal.classList.add('active');
+            // Prevenir scroll do body quando modal abrir
+            document.body.style.overflow = 'hidden';
             
             // Remover animação após um tempo
             setTimeout(() => {
@@ -947,6 +1161,8 @@
         function closePresent() {
             const modal = document.getElementById('presentModal');
             modal.classList.remove('active');
+            // Prevenir scroll do body quando modal fechar
+            document.body.style.overflow = '';
         }
 
         // Adicionar eventos de clique nos presentes
@@ -954,18 +1170,55 @@
             const presents = document.querySelectorAll('.present');
             
             presents.forEach(present => {
-                present.addEventListener('click', function() {
+                // Suporte para touch e click
+                present.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const presentNumber = this.getAttribute('data-present');
+                    openPresent(presentNumber);
+                });
+                
+                present.addEventListener('touchend', function(e) {
+                    e.preventDefault();
                     const presentNumber = this.getAttribute('data-present');
                     openPresent(presentNumber);
                 });
             });
 
-            // Fechar modal ao clicar fora
             const modal = document.getElementById('presentModal');
+            const modalContent = modal.querySelector('.modal-content');
+            
+            // Fechar modal ao clicar/tocar fora (melhorado para mobile)
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
                     closePresent();
                 }
+            });
+            
+            // Suporte para touch no mobile
+            let touchStartY = 0;
+            modal.addEventListener('touchstart', function(e) {
+                if (e.target === modal) {
+                    touchStartY = e.touches[0].clientY;
+                }
+            });
+            
+            modal.addEventListener('touchend', function(e) {
+                if (e.target === modal) {
+                    const touchEndY = e.changedTouches[0].clientY;
+                    // Se tocou no fundo (não no conteúdo), fechar
+                    if (Math.abs(touchEndY - touchStartY) < 10) {
+                        closePresent();
+                    }
+                }
+            });
+
+            // Prevenir que toques no conteúdo fechem o modal
+            modalContent.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+            
+            modalContent.addEventListener('touchend', function(e) {
+                e.stopPropagation();
             });
 
             // Fechar modal com ESC
@@ -973,6 +1226,22 @@
                 if (e.key === 'Escape') {
                     closePresent();
                 }
+            });
+            
+            // Prevenir scroll do body quando modal estiver aberto
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (modal.classList.contains('active')) {
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+            
+            observer.observe(modal, {
+                attributes: true,
+                attributeFilter: ['class']
             });
         });
 
